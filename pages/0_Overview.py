@@ -96,7 +96,7 @@ st.subheader("Data source")
 
 st.markdown(
 """
-The dataset is sourced from [Gapminder](https://www.gapminder.org/data/).  
+Based on free material from [GAPMINDER.ORG](https://www.gapminder.org/data/), CC-BY LICENSE.  
 All indicators have been preprocessed and merged into a single long format dataset for analysis.
 """
 )

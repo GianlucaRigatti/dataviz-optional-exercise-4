@@ -13,7 +13,7 @@ Put the project in a Git repository with a clean `README.md`, and a working Dock
 
 ## Datasets used
 
-The dataset is available at [Gapminder](https://www.gapminder.org/data/). The relevant files downloaded in the `data/` directory are:
+Based on free material from [GAPMINDER.ORG](https://www.gapminder.org/data/), CC-BY LICENSE. The relevant files downloaded in the `data/` directory are:
 - `gdp_pcap` : Gross Domestic Product per person adjusted for differences in purchasing power (in international dollars, fixed 2021 prices, PPP based on 2021 ICP).
 - `lex` : The number of years a newborn infant would live if the current mortality rates at different ages were to stay the same throughout its life.
 - `pop` : Total population counts the number of inhabitants in the territory.
