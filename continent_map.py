@@ -1,0 +1,248 @@
+COUNTRY_TO_CONTINENT = {
+    "Afghanistan": "Asia",
+    "Albania": "Europe",
+    "Algeria": "Africa",
+    "Andorra": "Europe",
+    "Angola": "Africa",
+    "Antigua and Barbuda": "North America",
+    "Argentina": "South America",
+    "Armenia": "Asia",
+    "Australia": "Oceania",
+    "Austria": "Europe",
+    "Azerbaijan": "Asia",
+    "Bahamas": "North America",
+    "Bahrain": "Asia",
+    "Bangladesh": "Asia",
+    "Barbados": "North America",
+    "Belarus": "Europe",
+    "Belgium": "Europe",
+    "Belize": "North America",
+    "Benin": "Africa",
+    "Bhutan": "Asia",
+    "Bolivia": "South America",
+    "Bosnia and Herzegovina": "Europe",
+    "Botswana": "Africa",
+    "Brazil": "South America",
+    "Brunei": "Asia",
+    "Bulgaria": "Europe",
+    "Burkina Faso": "Africa",
+    "Burundi": "Africa",
+    "Cambodia": "Asia",
+    "Cameroon": "Africa",
+    "Canada": "North America",
+    "Cape Verde": "Africa",
+    "Central African Republic": "Africa",
+    "Chad": "Africa",
+    "Chile": "South America",
+    "China": "Asia",
+    "Colombia": "South America",
+    "Comoros": "Africa",
+    "Congo, Dem. Rep.": "Africa",
+    "Congo, Rep.": "Africa",
+    "Costa Rica": "North America",
+    "Cote d'Ivoire": "Africa",
+    "Croatia": "Europe",
+    "Cuba": "North America",
+    "Cyprus": "Europe",
+    "Czech Republic": "Europe",
+    "Denmark": "Europe",
+    "Djibouti": "Africa",
+    "Dominica": "North America",
+    "Dominican Republic": "North America",
+    "Ecuador": "South America",
+    "Egypt": "Africa",
+    "El Salvador": "North America",
+    "Equatorial Guinea": "Africa",
+    "Eritrea": "Africa",
+    "Estonia": "Europe",
+    "Eswatini": "Africa",
+    "Ethiopia": "Africa",
+    "Fiji": "Oceania",
+    "Finland": "Europe",
+    "France": "Europe",
+    "Gabon": "Africa",
+    "Gambia": "Africa",
+    "Georgia": "Asia",
+    "Germany": "Europe",
+    "Ghana": "Africa",
+    "Greece": "Europe",
+    "Grenada": "North America",
+    "Guatemala": "North America",
+    "Guinea": "Africa",
+    "Guinea-Bissau": "Africa",
+    "Guyana": "South America",
+    "Haiti": "North America",
+    "Honduras": "North America",
+    "Hungary": "Europe",
+    "Iceland": "Europe",
+    "India": "Asia",
+    "Indonesia": "Asia",
+    "Iran": "Asia",
+    "Iraq": "Asia",
+    "Ireland": "Europe",
+    "Israel": "Asia",
+    "Italy": "Europe",
+    "Jamaica": "North America",
+    "Japan": "Asia",
+    "Jordan": "Asia",
+    "Kazakhstan": "Asia",
+    "Kenya": "Africa",
+    "Kiribati": "Oceania",
+    "Kuwait": "Asia",
+    "Kyrgyz Republic": "Asia",
+    "Lao": "Asia",
+    "Latvia": "Europe",
+    "Lebanon": "Asia",
+    "Lesotho": "Africa",
+    "Liberia": "Africa",
+    "Libya": "Africa",
+    "Lithuania": "Europe",
+    "Luxembourg": "Europe",
+    "Madagascar": "Africa",
+    "Malawi": "Africa",
+    "Malaysia": "Asia",
+    "Maldives": "Asia",
+    "Mali": "Africa",
+    "Malta": "Europe",
+    "Marshall Islands": "Oceania",
+    "Mauritania": "Africa",
+    "Mauritius": "Africa",
+    "Mexico": "North America",
+    "Micronesia, Fed. Sts.": "Oceania",
+    "Moldova": "Europe",
+    "Monaco": "Europe",
+    "Mongolia": "Asia",
+    "Montenegro": "Europe",
+    "Morocco": "Africa",
+    "Mozambique": "Africa",
+    "Myanmar": "Asia",
+    "Namibia": "Africa",
+    "Nauru": "Oceania",
+    "Nepal": "Asia",
+    "Netherlands": "Europe",
+    "New Zealand": "Oceania",
+    "Nicaragua": "North America",
+    "Niger": "Africa",
+    "Nigeria": "Africa",
+    "North Korea": "Asia",
+    "North Macedonia": "Europe",
+    "Norway": "Europe",
+    "Oman": "Asia",
+    "Pakistan": "Asia",
+    "Palau": "Oceania",
+    "Palestine": "Asia",
+    "Panama": "North America",
+    "Papua New Guinea": "Oceania",
+    "Paraguay": "South America",
+    "Peru": "South America",
+    "Philippines": "Asia",
+    "Poland": "Europe",
+    "Portugal": "Europe",
+    "Qatar": "Asia",
+    "Romania": "Europe",
+    "Russia": "Europe",
+    "Rwanda": "Africa",
+    "Samoa": "Oceania",
+    "San Marino": "Europe",
+    "Sao Tome and Principe": "Africa",
+    "Saudi Arabia": "Asia",
+    "Senegal": "Africa",
+    "Serbia": "Europe",
+    "Seychelles": "Africa",
+    "Sierra Leone": "Africa",
+    "Singapore": "Asia",
+    "Slovak Republic": "Europe",
+    "Slovenia": "Europe",
+    "Solomon Islands": "Oceania",
+    "Somalia": "Africa",
+    "South Africa": "Africa",
+    "South Korea": "Asia",
+    "South Sudan": "Africa",
+    "Spain": "Europe",
+    "Sri Lanka": "Asia",
+    "St. Kitts and Nevis": "North America",
+    "St. Lucia": "North America",
+    "St. Vincent and the Grenadines": "North America",
+    "Sudan": "Africa",
+    "Suriname": "South America",
+    "Sweden": "Europe",
+    "Switzerland": "Europe",
+    "Syria": "Asia",
+    "Tajikistan": "Asia",
+    "Tanzania": "Africa",
+    "Thailand": "Asia",
+    "Timor-Leste": "Asia",
+    "Togo": "Africa",
+    "Tonga": "Oceania",
+    "Trinidad and Tobago": "North America",
+    "Tunisia": "Africa",
+    "Turkey": "Asia",
+    "Turkmenistan": "Asia",
+    "Tuvalu": "Oceania",
+    "UAE": "Asia",
+    "UK": "Europe",
+    "USA": "North America",
+    "Uganda": "Africa",
+    "Ukraine": "Europe",
+    "Uruguay": "South America",
+    "Uzbekistan": "Asia",
+    "Vanuatu": "Oceania",
+    "Venezuela": "South America",
+    "Vietnam": "Asia",
+    "Yemen": "Asia",
+    "Zambia": "Africa",
+    "Zimbabwe": "Africa",
+}
+
+
+CONTINENT_ORDER = [
+    "Africa",
+    "Asia",
+    "Europe",
+    "North America",
+    "South America",
+    "Oceania",
+    "Unclassified",
+]
+
+
+def add_continent_column(data, country_col="name", continent_col="continent"):
+    """
+    Return a copy of the dataframe with a continent column added.
+
+    The Gapminder source files used in this project do not include continent
+    information, so this project uses a manual country-to-continent mapping.
+    """
+    data = data.copy()
+    data[continent_col] = data[country_col].map(COUNTRY_TO_CONTINENT)
+    data[continent_col] = data[continent_col].fillna("Unclassified")
+    return data
+
+
+def get_unclassified_countries(data, country_col="name"):
+    """
+    Return countries from the dataframe that are missing from the mapping.
+    Useful for checking whether the manual mapping covers the dataset.
+    """
+    countries = set(data[country_col].dropna().unique())
+    mapped_countries = set(COUNTRY_TO_CONTINENT.keys())
+
+    return sorted(countries - mapped_countries)
+
+
+def get_continents(data=None):
+    """
+    Return the standard continent order.
+
+    If a dataframe is provided, only continents present in the dataframe are returned.
+    """
+    if data is None or "continent" not in data.columns:
+        return CONTINENT_ORDER
+
+    present_continents = set(data["continent"].dropna().unique())
+
+    return [
+        continent
+        for continent in CONTINENT_ORDER
+        if continent in present_continents
+    ]
