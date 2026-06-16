@@ -50,12 +50,13 @@ avg_lex_delta_display = format_year(float(avg_lex_delta))
 
 st.subheader("Dataset summary")
 
-c1, c2, c3, c4 = st.columns(4)
+c1, c2, c3, c4, c5 = st.columns(5)
 
 c1.metric("Countries", countries_count)
-c2.metric("Years covered", f"{min_year}–{max_year}")
-c3.metric("Rows", f"{len(data):,}")
-c4.metric("Columns", len(data.columns))
+c2.metric("Continents", data["continent"].nunique())
+c3.metric("Years covered", f"{min_year}–{max_year}")
+c4.metric("Rows", f"{len(data):,}")
+c5.metric("Columns", len(data.columns))
 
 st.subheader(f"Global snapshot ({selected_year})")
 
@@ -85,7 +86,7 @@ c3.metric(
 st.subheader("Dataset")
 
 st.dataframe(
-    data.sort_values(["year", "name"]),
+    data.sort_values(["year", "continent", "name"]),
     use_container_width=True,
     hide_index=True
 )
