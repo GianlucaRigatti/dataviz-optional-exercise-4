@@ -6,7 +6,7 @@ from continent_map import add_continent_column, get_continents, COUNTRY_TO_CONTI
 
 
 st.title("Data Explorer")
-st.markdown(
+st.info(
 """
 Selected filters will be applied to all other pages in the dashboard.
 """
