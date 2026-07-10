@@ -11,8 +11,8 @@ This dashboard explores global development indicators from the Gapminder dataset
 
 It focuses on three key variables:
 
-- **GDP per capita** – economic output per person (PPP-adjusted).
-- **Life expectancy** – average expected lifespan at birth.
+- **GDP per Capita** – economic output per person (PPP-adjusted).
+- **Life Expectancy** – average expected lifespan at birth.
 - **Population** – total number of inhabitants.
 
 The dataset spans multiple countries and years, allowing analysis of global inequality and development trends over time.
@@ -48,36 +48,36 @@ avg_gdp_delta_display = format_currency(float(avg_gdp_delta))
 avg_lex_display = format_year(float(avg_lex))
 avg_lex_delta_display = format_year(float(avg_lex_delta))
 
-st.subheader("Dataset summary")
+st.subheader("Dataset Summary")
 
 c1, c2, c3, c4, c5 = st.columns(5)
 
 c1.metric("Countries", countries_count)
 c2.metric("Continents", data["continent"].nunique())
-c3.metric("Years covered", f"{min_year}–{max_year}")
+c3.metric("Years Covered", f"{min_year}–{max_year}")
 c4.metric("Rows", f"{len(data):,}")
 c5.metric("Columns", len(data.columns))
 
-st.subheader(f"Global snapshot ({selected_year})")
+st.subheader(f"Global Snapshot ({selected_year})")
 
 c1, c2, c3 = st.columns(3)
 
 c1.metric(
-    f"World population (vs. {previous_year})",
+    f"World Population (vs. {previous_year})",
     f"{world_pop:,.0f}",
     delta=f"{world_pop_delta:,.0f} ({world_pop_delta / world_pop_prev:.1%})",
     border=True,
 )
 
 c2.metric(
-    f"Avg GDP per capita (vs. {previous_year})",
+    f"Avg GDP per Capita (vs. {previous_year})",
 	avg_gdp_display,
     delta=f"{avg_gdp_delta_display} ({avg_gdp_delta / avg_gdp_prev:.1%})",
     border=True,
 )
 
 c3.metric(
-    f"Avg life expectancy (vs. {previous_year})",
+    f"Avg Life Expectancy (vs. {previous_year})",
 	avg_lex_display,
     delta=f"{avg_lex_delta_display} ({avg_lex_delta / avg_lex_prev:.1%})",
     border=True,
@@ -93,7 +93,7 @@ st.dataframe(
 
 st.divider()
 
-st.subheader("Data source")
+st.subheader("Data Source")
 
 st.markdown(
 """
@@ -101,5 +101,3 @@ Based on free material from [GAPMINDER.ORG](https://www.gapminder.org/data/), CC
 All indicators have been preprocessed and merged into a single long format dataset for analysis.
 """
 )
-
-# TODO: provide details about how missing values were handled?

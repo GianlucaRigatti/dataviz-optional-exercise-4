@@ -38,7 +38,7 @@ else:
 c1, c2 = st.columns([1, 2], gap="medium")
 
 with c1:
-    metric_map = {"GDP per capita": "gdp_pcap", "Life expectancy": "lex", "Population": "pop"}
+    metric_map = {"GDP per Capita": "gdp_pcap", "Life Expectancy": "lex", "Population": "pop"}
     metric_keys = list(metric_map.keys())
     choropleth_metric_label = st.selectbox("Metric", options=metric_keys, index=0, key="choropleth_metric")
     choropleth_step = st.slider("Year step", min_value=1, max_value=10, value=1, step=1, key="choropleth_step")
@@ -64,22 +64,47 @@ else:
         locations="iso_a3",
         color=choropleth_metric,
         hover_name="name",
-        hover_data={
-            "year": True,
-            "continent": True,
-            choropleth_metric: ":,.2f",
-            "iso_a3": False,
-        },
+        custom_data=[
+            "continent",
+            "year",
+            choropleth_metric,
+        ],
         animation_frame="year",
         color_continuous_scale="Viridis",
         projection="natural earth",
-        labels={
-            "gdp_pcap": "GDP per capita",
-            "lex": "Life expectancy",
-            "pop": "Population",
-            "year": "Year",
-        },
     )
+    hover_templates = {
+        "gdp_pcap": (
+            "<b>%{hovertext}</b><br>"
+            "Continent: %{customdata[0]}<br>"
+            "Year: %{customdata[1]}<br>"
+            "GDP per Capita: $%{customdata[2]:,.0f}"
+            "<extra></extra>"
+        ),
+        "lex": (
+            "<b>%{hovertext}</b><br>"
+            "Continent: %{customdata[0]}<br>"
+            "Year: %{customdata[1]}<br>"
+            "Life Expectancy: %{customdata[2]:.1f} years"
+            "<extra></extra>"
+        ),
+        "pop": (
+            "<b>%{hovertext}</b><br>"
+            "Continent: %{customdata[0]}<br>"
+            "Year: %{customdata[1]}<br>"
+            "Population: %{customdata[2]:,.0f}"
+            "<extra></extra>"
+        ),
+    }
+
+    # Apply hover template to initial trace
+    for trace in fig.data:
+        trace.hovertemplate = hover_templates[choropleth_metric]
+
+    # Apply hover template to animation frames
+    for frame in fig.frames:
+        for trace in frame.data:
+            trace.hovertemplate = hover_templates[choropleth_metric]
     
     st.plotly_chart(fig, use_container_width=True, theme="streamlit")
 
@@ -122,9 +147,33 @@ else:
             y=ts_metric,
             color="name",
             markers=True,
-            labels={ts_metric: ts_metric_label, "year": "Year"},
+            custom_data=["name"],
+            labels={
+                ts_metric: ts_metric_label,
+                "year": "Year",
+                "name": "Country",
+            },
         )
         ts_fig.update_layout(hovermode="x unified")
-        st.plotly_chart(ts_fig, use_container_width=True)
+        hover_templates = {
+            "gdp_pcap": (
+                "<b>%{customdata[0]}</b><br>"
+                "GDP per Capita: $%{y:,.0f}"
+                "<extra></extra>"
+            ),
+            "lex": (
+                "<b>%{customdata[0]}</b><br>"
+                "Life Expectancy: %{y:.1f} years"
+                "<extra></extra>"
+            ),
+            "pop": (
+                "<b>%{customdata[0]}</b><br>"
+                "Population: %{y:,.0f}"
+                "<extra></extra>"
+            ),
+        }
+        ts_fig.update_traces(
+            hovertemplate=hover_templates[ts_metric]
+        )
 
-# TODO: When I hover on one datapoint, I want to see the tooltip for all the datapoints of the selected countries!
+        st.plotly_chart(ts_fig, use_container_width=True)

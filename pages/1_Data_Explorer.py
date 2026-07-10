@@ -69,7 +69,7 @@ filtered_data = continent_filtered[
 filtered_data = filtered_data.sort_values(["year", "continent", "name"])
 st.session_state["filtered_data"] = filtered_data
 
-st.subheader("Filtered dataset summary")
+st.subheader("Filtered Dataset Summary")
 
 if filtered_data.empty:
     st.warning("No records match the selected filters.")
@@ -79,13 +79,13 @@ else:
     c1.metric("Countries", filtered_data["name"].nunique())
     c2.metric("Continents", filtered_data["continent"].nunique())
     c3.metric(
-        "Years covered",
+        "Years Covered",
         f"{int(filtered_data['year'].min())}–{int(filtered_data['year'].max())}",
     )
     c4.metric("Rows", f"{len(filtered_data):,}")
     c5.metric("Columns", f"{len(filtered_data.columns)}")
 
-    st.subheader("Filtered dataset")
+    st.subheader("Filtered Dataset")
 
     st.dataframe(
         filtered_data.sort_values(["year", "continent", "name"]),

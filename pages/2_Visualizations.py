@@ -26,13 +26,7 @@ else:
 available_continents = sorted(data["continent"].dropna().unique())
 available_years = sorted(data["year"].dropna().unique())
 
-st.subheader(f"GDP per capita vs life expectancy")
-st.markdown(
-    """
-    Each bubble represents a country. The horizontal axis shows GDP per capita,
-    the vertical axis shows life expectancy, and bubble size represents population.
-    """
-)
+st.subheader(f"GDP per Capita vs. Life Expectancy (Bubble Size = Population)")
 
 c1, c2 = st.columns([1, 2], gap="medium")
 
@@ -61,35 +55,32 @@ else:
         size="pop",
         color="continent",
         hover_name="name",
-        hover_data={
-            "continent": True,
-            "gdp_pcap": ":,.0f",
-            "lex": ":.1f",
-            "pop": ":,.0f",
-            "year": True,
-        },
+        custom_data=["continent", "pop", "year"],
         log_x=True,
         size_max=70,
-        labels={
-            "gdp_pcap": "GDP per capita",
-            "lex": "Life expectancy",
-            "pop": "Population",
-            "continent": "Continent",
-            "year": "Year",
-        },
     )
-
     bubble_fig.update_layout(
-        xaxis_title="GDP per capita [log scale]",
-        yaxis_title="Life expectancy",
+        xaxis_title="GDP per Capita [log scale]",
+        yaxis_title="Life Expectancy",
         legend_title="Continent",
+    )
+    bubble_fig.update_traces(
+        hovertemplate=(
+            "<b>%{hovertext}</b><br>"
+            "Continent: %{customdata[0]}<br>"
+            "GDP per Capita: $%{x:,.0f}<br>"
+            "Life Expectancy: %{y:.1f} years<br>"
+            "Population: %{customdata[1]:,.0f}<br>"
+            "Year: %{customdata[2]}<br>"
+            "<extra></extra>"
+        )
     )
 
     st.plotly_chart(bubble_fig, use_container_width=True)
 
 st.divider()
 
-st.subheader("Continent comparison")
+st.subheader("Continent Comparison")
 
 # Layout: left column for compact controls (year, metric), right column for continent multi-select
 c1, c2 = st.columns([1, 2], gap="medium")
@@ -100,10 +91,10 @@ with c1:
     )
 
     continent_metric_options = {
-        "Average GDP per capita": "avg_gdp_pcap",
-        "Average life expectancy": "avg_life_expectancy",
-        "Total population": "total_population",
-        "Number of countries": "countries",
+        "Average GDP per Capita": "avg_gdp_pcap",
+        "Average Life Expectancy": "avg_life_expectancy",
+        "Total Population": "total_population",
+        "Number of Countries": "countries",
     }
 
     selected_continent_metric_label = st.selectbox(
@@ -141,28 +132,56 @@ else:
         continent_summary,
         x="continent",
         y=selected_continent_metric,
-        hover_data={
-            "countries": True,
-            "total_population": ":,.0f",
-            "avg_gdp_pcap": ":,.0f",
-            "avg_life_expectancy": ":.1f",
-        },
+        custom_data=[
+            "countries",
+            "total_population",
+            "avg_gdp_pcap",
+            "avg_life_expectancy",
+        ],
         labels={
             "continent": "Continent",
             "countries": "Countries",
-            "total_population": "Total population",
-            "avg_gdp_pcap": "Average GDP per capita",
-            "avg_life_expectancy": "Average life expectancy",
+            "total_population": "Total Population",
+            "avg_gdp_pcap": "Average GDP per Capita",
+            "avg_life_expectancy": "Average Life Expectancy",
         },
     )
-
-    continent_fig.update_layout(xaxis_title="Continent", yaxis_title=selected_continent_metric_label, showlegend=False)
+    continent_fig.update_layout(
+        xaxis_title="Continent", 
+        yaxis_title=selected_continent_metric_label, 
+        showlegend=False
+    )
+    hover_templates = {
+        "avg_gdp_pcap": (
+            "<b>%{x}</b><br>"
+            "Average GDP per Capita: $%{y:,.0f}"
+            "<extra></extra>"
+        ),
+        "avg_life_expectancy": (
+            "<b>%{x}</b><br>"
+            "Average Life Expectancy: %{y:.1f} years"
+            "<extra></extra>"
+        ),
+        "total_population": (
+            "<b>%{x}</b><br>"
+            "Total Population: %{y:,.0f}"
+            "<extra></extra>"
+        ),
+        "countries": (
+            "<b>%{x}</b><br>"
+            "Number of Countries: %{y:.0f}"
+            "<extra></extra>"
+        ),
+    }
+    continent_fig.update_traces(
+        hovertemplate=hover_templates[selected_continent_metric]
+    )
 
     st.plotly_chart(continent_fig, use_container_width=True)
 
 st.divider()
 
-st.subheader(f"Top countries by selected metric")
+st.subheader(f"Top Countries")
 
 c1, c2 = st.columns([1, 2], gap="medium")
 
@@ -172,8 +191,8 @@ with c1:
     )
 
     metric_options = {
-        "GDP per capita": "gdp_pcap",
-        "Life expectancy": "lex",
+        "GDP per Capita": "gdp_pcap",
+        "Life Expectancy": "lex",
         "Population": "pop",
     }
     selected_metric_label = st.selectbox(
@@ -189,7 +208,7 @@ with c2:
     )
 
     top_n = st.slider(
-        "Number of countries to show",
+        "Number of Countries to Show",
         min_value=5,
         max_value=25,
         value=15,
@@ -216,26 +235,42 @@ else:
         y="name",
         color="continent",
         orientation="h",
-        hover_name="name",
-        hover_data={
-            "continent": True,
-            "gdp_pcap": ":,.0f",
-            "lex": ":.1f",
-            "pop": ":,.0f",
-        },
+        custom_data=["continent"],
         labels={
             "name": "Country",
-            "gdp_pcap": "GDP per capita",
-            "lex": "Life expectancy",
+            "gdp_pcap": "GDP per Capita",
+            "lex": "Life Expectancy",
             "pop": "Population",
             "continent": "Continent",
         },
     )
-
     bar_fig.update_layout(
         xaxis_title=selected_metric_label,
         yaxis_title="Country",
         legend_title="Continent",
+    )
+    hover_templates = {
+        "gdp_pcap": (
+            "<b>%{y}</b><br>"
+            "Continent: %{customdata[0]}<br>"
+            "GDP per Capita: $%{x:,.0f}"
+            "<extra></extra>"
+        ),
+        "lex": (
+            "<b>%{y}</b><br>"
+            "Continent: %{customdata[0]}<br>"
+            "Life Expectancy: %{x:.1f} years"
+            "<extra></extra>"
+        ),
+        "pop": (
+            "<b>%{y}</b><br>"
+            "Continent: %{customdata[0]}<br>"
+            "Population: %{x:,.0f}"
+            "<extra></extra>"
+        ),
+    }
+    bar_fig.update_traces(
+        hovertemplate=hover_templates[selected_metric]
     )
 
     st.plotly_chart(bar_fig, use_container_width=True)
