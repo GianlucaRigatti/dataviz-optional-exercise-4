@@ -13,9 +13,8 @@ st.markdown(
 )
 
 if (
-	"filtered_data" in st.session_state
-	and isinstance(st.session_state.get("filtered_data"), pd.DataFrame)
-	and not st.session_state.get("filtered_data").empty
+    "filtered_data" in st.session_state
+    and isinstance(st.session_state.get("filtered_data"), pd.DataFrame)
 ):
 	data = st.session_state.get("filtered_data").copy()
 	st.success(f"Ready to download {len(data):,} filtered rows.")
@@ -39,10 +38,10 @@ with st.expander("Selected Filters", expanded=False):
         c1, c2, c3 = st.columns(3, gap="medium")
         with c1:
             st.write("**Continents**")
-            st.write(", ".join(filters.get("continents", [])) or "All")
+            st.write(", ".join(filters.get("continents", [])) or "None")
         with c2:
             st.write("**Countries**")
-            st.write(", ".join(filters.get("countries", [])) or "All")
+            st.write(", ".join(filters.get("countries", [])) or "None")
         with c3:
             year_range = filters.get("year_range")
             st.write("**Year range**")

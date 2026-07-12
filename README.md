@@ -26,18 +26,117 @@ Based on free material from [GAPMINDER.ORG](https://www.gapminder.org/data/), CC
 
 ---
 
-## How to run the app locally
+## Dashboard Features
 
-1. Create a virtual environment: `python -m venv venv && source venv/bin/activate`
-2. Install dependencies: `pip install -r requirements.txt`
-3. Run the app: `streamlit run main.py`
+The application is organized into five Streamlit pages:
 
----
+- **Overview** provides an introduction to the dataset, summary statistics, global indicators, and a complete data table.
+- **Data Explorer** allows filtering by continent, country, and year range.
+- **Visualizations** includes:
+  - GDP per capita versus life expectancy, with population represented by bubble size
+  - Continent-level comparisons
+  - Rankings of the top countries by GDP per capita, life expectancy, or population
+- **Trend Analysis** includes an animated world map and country comparisons over time.
+- **Download** exports the currently filtered dataset as a CSV file.
 
-## How to run the app in Docker
+Filters selected in the Data Explorer are stored in the Streamlit session and applied to the visualization, trend-analysis, and download pages.
 
-1. cd to the project directory
-2. Build the Docker image: `docker build -t gapminder-dashboard . `
-3. Run the Docker container:
-- `docker run -p 8501:8501 gapminder-dashboard`
-- (auto-remove): `docker run --rm -p 8501:8501 gapminder-dashboard`
+## Data Preparation
+
+The source Gapminder datasets are converted from wide to long format and merged into a single file containing:
+
+- `geo`: country code
+- `name`: country name
+- `year`: observation year
+- `gdp_pcap`: GDP per capita
+- `lex`: life expectancy
+- `pop`: population
+- `continent`: continent classification
+
+The preprocessing workflow is available in `preprocessing.ipynb`. The generated dataset used by the dashboard is stored at:
+
+```text
+data/gapminder_aggregated.csv
+```
+
+## Project Structure
+
+```text
+.
+├── data/
+│   └── gapminder_aggregated.csv
+├── pages/
+│   ├── 0_Overview.py
+│   ├── 1_Data_Explorer.py
+│   ├── 2_Visualizations.py
+│   ├── 3_Trend_Analysis.py
+│   └── 4_Download.py
+├── continent_map.py
+├── data_loader.py
+├── format.py
+├── main.py
+├── preprocessing.ipynb
+├── requirements.txt
+└── Dockerfile
+```
+
+## Run Locally
+
+Create and activate a virtual environment:
+
+```bash
+python -m venv venv
+source venv/bin/activate
+```
+
+On Windows:
+
+```bash
+venv\Scripts\activate
+```
+
+Install the dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+Start the dashboard:
+
+```bash
+streamlit run main.py
+```
+
+The application will be available at:
+
+```text
+http://localhost:8501
+```
+
+## Run with Docker
+
+Build the Docker image:
+
+```bash
+docker build -t gapminder-dashboard .
+```
+
+Run the container:
+
+```bash
+docker run -p 8501:8501 gapminder-dashboard
+```
+
+Open the dashboard at:
+
+```text
+http://localhost:8501
+```
+
+## Technologies
+
+- Python 3.11
+- Streamlit
+- Pandas
+- Plotly
+- Docker

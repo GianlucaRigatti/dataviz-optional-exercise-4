@@ -11,7 +11,6 @@ st.title("Visualizations")
 if (
     "filtered_data" in st.session_state
     and isinstance(st.session_state.get("filtered_data"), pd.DataFrame)
-    and not st.session_state.get("filtered_data").empty
 ):
     st.success(
         "Filters applied successfully."
@@ -111,8 +110,9 @@ with c2:
 # Compute filtered data after widgets are created
 cont_df = data[data["continent"].isin(cont_continents)]
 cont_year_data = cont_df[cont_df["year"] == cont_year].copy()
-cont_year_data = cont_year_data.dropna(subset=["gdp_pcap", "lex", "pop", "continent", "name"])
-
+cont_year_data = cont_year_data.dropna(
+    subset=["continent", "name"]
+)
 if cont_year_data.empty:
     st.warning("No data is available for the selected continent-comparison filters.")
 else:
@@ -218,8 +218,9 @@ with c2:
 
 top_df = data[data["continent"].isin(top_continents)]
 top_year_data = top_df[top_df["year"] == top_year].copy()
-top_year_data = top_year_data.dropna(subset=["gdp_pcap", "lex", "pop", "continent", "name"])
-
+top_year_data = top_year_data.dropna(
+    subset=[selected_metric, "continent", "name"]
+)
 if top_year_data.empty:
     st.warning("No data is available for the selected top-countries filters.")
 else:

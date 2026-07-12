@@ -11,7 +11,6 @@ st.title("Trend Analysis")
 if (
     "filtered_data" in st.session_state
     and isinstance(st.session_state.get("filtered_data"), pd.DataFrame)
-    and not st.session_state.get("filtered_data").empty
 ):
     st.success(
         "Filters applied successfully."
